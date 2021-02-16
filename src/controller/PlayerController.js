@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-
 const playerModel = require('../model/PlayerSchema');
-
+const utilsMessage = require('../utils/message.utils');
 module.exports = {
     getHello: (req, res) => {
         res.json('hello')
@@ -9,21 +8,18 @@ module.exports = {
 
     getAllPlayer: async (req, res) => {
         const players = await playerModel.find();
-        res.json(players);
+        utilsMessage.successResponse(res, players, 'All record has been loaded.');
     },
 
     createPlayer: (req, res) => {
-        console.log(' h ', req.body)
         const playerData = new playerModel({
             name: req.body.name,
             age: req.body.age
         });
 
         playerData.save(() => {
-            console.log('data added');
-            res.json({
-                message: 'Player has been added'
-            })
+            //console.log('data created');
+            utilsMessage.successResponse(res, playerData, 'Data has been created.');
         });
     },
 
@@ -36,17 +32,13 @@ module.exports = {
             });
 
             if (!playerResult) {
-                res.status(404).json({
-                    message: 'This player is not exist'
-                });
+                utilsMessage.errorMessages(res, 404, 'This player is not exist.');
             } else {
-                res.json(playerResult);
+                utilsMessage.successResponse(res, playerResult, 'Data has been loaded.');
             }
 
         } else {
-            res.status(400).json({
-                message: 'This is not a valid id'
-            });
+            utilsMessage.errorMessages(res, 400, 'This is not a valid id')
         }
 
     },
@@ -60,9 +52,7 @@ module.exports = {
             });
 
             if (!playerResult) {
-                res.status(404).json({
-                    message: 'This player is not exist'
-                });
+                utilsMessage.errorMessages(res, 404, 'This player is not exist.');
             } else {
 
                 // update data
@@ -78,21 +68,12 @@ module.exports = {
                 const updatedPlayer = await playerModel.updateOne(query, playerData);
 
                 // show response
-                res.status(200).json({
-                    id: id,
-                    message: 'Updated',
-                    info: {
-                        matched: updatedPlayer.n,
-                        modified: updatedPlayer.nModified
-                    }
-                });
+                utilsMessage.successResponse(res, null, 'Data has been updaed!');
 
             }
 
         } else {
-            res.status(400).json({
-                message: 'This is not a valid id'
-            });
+            utilsMessage.errorMessages(res, 400, 'This is not a valid id');
         }
     },
     deletePlayer: async (req, res) => {
@@ -104,9 +85,7 @@ module.exports = {
             });
 
             if (!playerResult) {
-                res.status(404).json({
-                    message: 'This player is not exist'
-                });
+                utilsMessage.errorMessages(res, 400, 'This player is not exist');
             } else {
 
                 // write update suff
@@ -115,19 +94,12 @@ module.exports = {
                 };
 
                 await playerModel.deleteOne(query);
-
-                // show response
-                res.status(200).json({
-                    id: id,
-                    message: 'Deleted sucessfully'
-                });
+                utilsMessage.successResponse(res, {id: id}, 'Data has been deleted!');
 
             }
 
         } else {
-            res.status(400).json({
-                message: 'This is not a valid id'
-            });
+            utilsMessage.errorMessages(res, 400, 'This is not a valid id');
         }
     }
 };
