@@ -10,7 +10,7 @@ POST http://localhost:4000/player
 Content-Type: application/json
 
 {
-    "name": "ROy wilson",
+    "name": "bhutta",
     "age": 50
 }
 
