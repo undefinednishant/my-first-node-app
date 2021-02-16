@@ -100,11 +100,13 @@ app.put('/player/:id', async (req, res) => {
                 name: req.body.name,
                 age: req.body.age
             };
-            
+
             // write update suff
-            const query = { _id: id };
+            const query = {
+                _id: id
+            };
             const updatedPlayer = await playerModel.updateOne(query, playerData);
-            
+
             // show response
             res.status(200).json({
                 id: id,
@@ -124,14 +126,41 @@ app.put('/player/:id', async (req, res) => {
     }
 });
 
+app.delete('/player/:id', async (req, res) => {
+    const id = req.params.id;
+    const isValidId = mongoose.Types.ObjectId.isValid(req.params.id);
+    if (isValidId) {
+        const playerResult = await playerModel.findOne({
+            "_id": id
+        });
 
+        if (!playerResult) {
+            res.status(404).json({
+                message: 'This player is not exist'
+            });
+        } else {
 
+            // write update suff
+            const query = {
+                _id: id
+            };
+            
+            await playerModel.deleteOne(query);
 
+            // show response
+            res.status(200).json({
+                id: id,
+                message: 'Deleted sucessfully'
+            });
 
+        }
 
-
-
-
+    } else {
+        res.status(400).json({
+            message: 'This is not a valid id'
+        });
+    }
+})
 
 
 // mongoose DB connection
