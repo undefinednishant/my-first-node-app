@@ -3,26 +3,26 @@ GET http://localhost:4000/players
 
 
 ### get player details
-GET http://localhost:4000/player/602bba7896bf905770bee412
+GET http://localhost:4000/player/602bee441025fa50d0022434
 
 ### create player
 POST http://localhost:4000/player
 Content-Type: application/json
 
 {
-    "name": "bhutta",
+    "name": "sohania",
     "age": 50
 }
 
 
 ### update player
-PUT http://localhost:4000/player/602bba7896bf905770bee412
+PUT http://localhost:4000/player/602bee441025fa50d0022434
 Content-Type: application/json
 
 {
-    "name": "new another",
+    "name": "arjunwa",
     "age": 21133
 }
 
 ### delete player
-DELETE  http://localhost:4000/player/602bbc3635cd4d51645d8ce2
+DELETE  http://localhost:4000/player/602bee441025fa50d0022434
