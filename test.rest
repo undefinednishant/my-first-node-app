@@ -10,8 +10,10 @@ POST http://localhost:4000/player
 Content-Type: application/json
 
 {
-    "name": "rahman",
-    "age": 50
+    "name": "Rohit Verma",
+    "age": 22,
+    "salary": 34000,
+    "location": "Sribanka"
 }
 
 
@@ -20,8 +22,8 @@ PUT http://localhost:4000/player/602bd966333bb44e4cc23eea
 Content-Type: application/json
 
 {
-    "name": "sumia",
-    "age": 21133
+    "age": 24,
+    "active": true
 }
 
 ### delete player
