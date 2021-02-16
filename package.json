@@ -1,0 +1,19 @@
+{
+  "name": "my-first-node-app",
+  "version": "1.0.0",
+  "description": "this is first mongo db project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/undefinednishant/my-first-node-app.git"
+  },
+  "author": "nishant kumar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/undefinednishant/my-first-node-app/issues"
+  },
+  "homepage": "https://github.com/undefinednishant/my-first-node-app#readme"
+}
